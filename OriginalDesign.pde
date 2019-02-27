@@ -1,44 +1,79 @@
+MainChara mSprite;
 int centerY=height/2;
 int centerX=width/2;
-int zoomCount=0;
-void setup()
+public void setup()
 {
-  size(300, 300);
-  frameRate(100);
+	mSprite=new MainChara();
+	background(0,0,0);
+	size(500, 500);
+	frameRate(60);
+	println("setup");
 }
-void draw()
+public void show()
 {
-	drawZoom();
+	mSprite.show();
+	println("show");
+	testRect();
 }
-void drawZoom()
+public void draw()
 {
-	switch(zoomCount)
+	backScreen();
+	mSprite.move();
+	println("draw");
+	show();
+}
+public void keyPressed()
+{
+	switch(key)
 	{
-		case 0 :
-			fill(255, 0, 0);
-			rect(0, 0, 300, 300);
-			fill(0, 255, 0);
-			rect(centerX, centerY, 200, 200);
-			fill(0, 0, 255);
-			rect(centerX+50, centerY+50, 100, 100);
+		case 'd':
+			mSprite.moveX(5);
+			if(mSprite.getX()>=width-100)
+			{
+				mSprite.setX(width-100);
+			}
 		break;
-		case 1 :	
-			fill(0, 255, 0);
-			rect(0, 0, 300, 300);
-			fill(0, 0, 255);
-			rect(centerX, centerY, 200, 200);
-			fill(255, 0, 0);
-			rect(centerX+50, centerY+50, 100, 100);
+		case 'a':
+			mSprite.moveX(-5);
+			if(mSprite.getX()<=0)
+			{
+				mSprite.setX(0);
+			}
 		break;
-		case 2:
-			fill(0, 0, 255);
-			rect(0, 0, 300, 300);
-			fill(255, 0, 0);
-			rect(centerX, centerY, 200, 200);
-			fill(0, 255, 0);
-			rect(centerX+50, centerY+50, 100, 100);
+		case 'w':
+			mSprite.moveY(-10);
+			if(mSprite.getY()>0)
+			{
+				mSprite.moveY(-10);
+			}
+			if(mSprite.getY()<=0)
+			{
+				mSprite.setY(0);
+				mSprite.setChangeY(0);
+			}
+		break;
+		case 's':
+			if(mSprite.getY()<height-100)
+			{
+				mSprite.moveY(10);
+			}
+			if(mSprite.getY()>=height-100)
+			{
+				mSprite.setY(height-100);
+				mSprite.setChangeY(0);
+			}
 		break;
 	}
-	zoomCount++;
-	zoomCount%=3;
+}
+public void testRect()
+{
+	fill(85,170,255);
+	rect(mSprite.getX(), mSprite.getY(), 100, 100);
+	noFill();
+}
+public void backScreen()
+{
+	fill(100,100,100);
+	rect(0, 0, width, height);
+	noFill();
 }
