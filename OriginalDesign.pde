@@ -1,4 +1,36 @@
-MainChara mSprite;
+float startX=0, startY=250;
+float endX, endY;
+float centerX=250, centerY=250;
+void setup()
+{
+	background(255,0,0);
+	size(500, 500);
+	frameRate(60);
+}
+void draw()
+{
+	// fill(255,0,0);
+	// rect(0,0,500,500);
+	endRand();
+	strokeWeight(10);
+	fill(0,0,0);
+	line(startX,startY,endX,endY);
+	startX=endX;
+	startY=endY;
+}
+void endRand()
+{
+	endX=(float)Math.random()*500;
+	endY=(float)Math.random()*500;
+	while(dist(endX,endY,centerX,centerY)>250||dist(endX,endY,centerX,centerY)<250)
+	{
+		endX=(float)Math.random()*500;
+		endY=(float)Math.random()*500;
+	}
+}
+
+
+/*MainChara mSprite;
 int centerY=height/2;
 int centerX=width/2;
 public void setup()
@@ -85,4 +117,4 @@ public void backScreen()
 	fill(100,100,100);
 	rect(0, 0, width, height);
 	noFill();
-}
+}*/

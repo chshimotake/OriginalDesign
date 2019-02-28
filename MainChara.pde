@@ -1,4 +1,4 @@
-class MainChara extends Sprite
+/*class MainChara extends Sprite
 {
 	public MainChara()
 	{
@@ -40,4 +40,4 @@ class MainChara extends Sprite
 	{
 		yChange=y;
 	}
-}
+}*/
