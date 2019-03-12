@@ -1,30 +1,51 @@
-/*class MainChara extends Sprite
+class MainChara extends Sprite
 {
 	public MainChara()
 	{
 		int[] xVert=new int[]{-50,50,50,-50};
 		int[] yVert=new int[]{50,50,-50,-50};
 		int vertices=4;
-		double myCenterX=10;
-		double myCenterY=10;
-		int xChange=0;
-		int yChange=0;
+		double myCenterX=0;
+		double myCenterY=0;
+		// int xChange=0;
+		// int yChange=0;
 		int myColor=color(255,255,255);
 	}
-	void moveX(int x){xChange+=x;}
+	void moveRight()
+	{
+		if(myCenterX>0||myCenterX<900)
+		{
+			right=true;
+			left=false;
+		}
+	}
+	void moveLeft()
+	{
+		if(myCenterX>0||myCenterX<900)
+		{
+			right=false;
+			left=true;
+		}
+	}
 	int getX(){return (int)myCenterX;}
 	void setX(int x)
 	{
 		myCenterX=x;
 	}
-	void moveY(int y)
+	void moveUp()
 	{
-		if(y>0)
+		if(myCenterY>0||myCenterY<400)
 		{
-			yChange+=y;
-		}else if(y<0)
+			up=true;
+			down=false;
+		}
+	}
+	void moveDown()
+	{
+		if(myCenterY>0||myCenterY<400)
 		{
-			yChange+=y;
+			up=false;
+			down=up;
 		}
 	}
 	int getY(){return (int)myCenterY;}
@@ -32,12 +53,12 @@
 	{
 		myCenterY=y;
 	}
-	void setChangeX(int x)
-	{
-		xChange=x;
-	}
-	void setChangeY(int y)
-	{
-		yChange=y;
-	}
-}*/
+	// void setChangeX(int x)
+	// {
+	// 	xChange=x;
+	// }
+	// void setChangeY(int y)
+	// {
+	// 	yChange=y;
+	// }
+}

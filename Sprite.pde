@@ -5,36 +5,40 @@ abstract class Sprite
 	protected int vertices;
 	protected double myCenterX;
 	protected double myCenterY;
-	protected int xChange;
-	protected int yChange;
+	protected boolean right = false;
+	protected boolean left = false;
+	protected boolean up = false;
+	protected boolean down = false;
+	// protected int xChange;
+	// protected int yChange;
 	protected int myColor;
-	abstract public void moveX(int x);
+	abstract public void moveRight();
+	abstract public void moveLeft();
 	abstract public int getX();
 	abstract public void setX(int x);
-	abstract public void moveY(int y);
+	abstract public void moveUp();
+	abstract public void moveDown();
 	abstract public int getY();
 	abstract public void setY(int y);
-	abstract public void setChangeX(int x);
-	abstract public void setChangeY(int y);
+	// abstract public void setChangeX(int x);
+	// abstract public void setChangeY(int y);
 	public void move()
 	{
-		myCenterX+=xChange;
-		myCenterY+=yChange;
-		if(xChange>0)
+		if(myCenterX<=900&&myCenterX>=0&&right)
 		{
-			xChange--;
+			myCenterX+=10;
 		}
-		if(xChange<0)
+		if(myCenterX<=900&&myCenterX>=0&&left)
 		{
-			xChange++;
+			myCenterX-=10;
 		}
-		if(yChange>0)
+		if(myCenterY<=400&&myCenterY>=0&&up)
 		{
-			yChange--;
+			myCenterY-=10;
 		}
-		if(yChange<0)
+		if(myCenterY<=400&&myCenterY>=0&&down)
 		{
-			yChange++;
+			myCenterY+=10;
 		}
 		if(myCenterY<height-100)
 		{
