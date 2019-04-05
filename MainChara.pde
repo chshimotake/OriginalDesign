@@ -13,19 +13,19 @@ class MainChara extends Sprite
 	}
 	void moveRight()
 	{
-		if(myCenterX>0||myCenterX<900)
-		{
+		// if(myCenterX>0||myCenterX<900)
+		// {
 			right=true;
 			left=false;
-		}
+		// }
 	}
 	void moveLeft()
 	{
-		if(myCenterX>0||myCenterX<900)
-		{
+		// if(myCenterX>0||myCenterX<900)
+		// {
 			right=false;
 			left=true;
-		}
+		// }
 	}
 	int getX(){return (int)myCenterX;}
 	void setX(int x)
@@ -34,10 +34,12 @@ class MainChara extends Sprite
 	}
 	void moveUp()
 	{
-		if(myCenterY>0||myCenterY<400)
+		if(myCenterY>=0)
 		{
 			up=true;
 			down=false;
+		}else{
+			up=false;
 		}
 	}
 	void moveDown()

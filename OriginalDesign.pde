@@ -7,7 +7,6 @@ public void setup()
 	background(0,0,0);
 	size(1000, 500);
 	frameRate(60);
-	println("setup");
 }
 public void show()
 {
@@ -16,14 +15,12 @@ public void show()
 void drawZoom()
 {
 	mSprite.show();
-	println("show");
 	testRect();
 }
 public void draw()
 {
 	backScreen();
 	mSprite.move();
-	println("draw");
 	show();
 }
 public void keyPressed()

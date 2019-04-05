@@ -9,6 +9,10 @@ abstract class Sprite
 	protected boolean left = false;
 	protected boolean up = false;
 	protected boolean down = false;
+	protected int grav = 1;
+	protected int gravcount = 0;
+	protected int walk = 0;
+	protected int walkcount = 0;
 	// protected int xChange;
 	// protected int yChange;
 	protected int myColor;
@@ -24,33 +28,67 @@ abstract class Sprite
 	// abstract public void setChangeY(int y);
 	public void move()
 	{
-		if(myCenterX<=900&&myCenterX>=0&&right)
+		if(myCenterX<=900&&right)
 		{
-			myCenterX+=10;
+			walk=8;
+			right=false;
 		}
-		if(myCenterX<=900&&myCenterX>=0&&left)
+		if(myCenterX>=0&&left)
 		{
-			myCenterX-=10;
+			walk=-8;
+			left=false;
 		}
-		if(myCenterY<=400&&myCenterY>=0&&up)
+		if(myCenterY>=0&&up)
 		{
-			myCenterY-=10;
+			grav=-5; //hewwo :3 -Jodie :33333333333333;
+			up=false;
 		}
 		if(myCenterY<=400&&myCenterY>=0&&down)
 		{
 			myCenterY+=10;
 		}
-		if(myCenterY<height-100)
+		if(myCenterX<=900&&myCenterX>=0)
+			println("y before grav: "+myCenterY);
+			myCenterX+=walk;
+			println("y after grav: "+myCenterY);
+			walkcount++;
+			if(walkcount%15==0)
+			{
+				if(walk>0)
+				{
+					walk-=4;
+				}
+				if(walk<0)
+				{
+					walk+=4;
+				}
+			}
+		if(myCenterY>=0)
 		{
-			myCenterY+=2;
+			println("y before grav: "+myCenterY);
+			myCenterY+=grav;
+			println("y after grav: "+myCenterY);
+			gravcount++;
+			if(gravcount%15==0)
+			{
+				grav+=2;
+			}
+		}
+		if(myCenterY>=400)
+		{
+			myCenterY=400;
+			grav=0;
+		}
+		if(myCenterY<=0)
+		{
+			myCenterY=0;
+			grav=1;
 		}
 	}
 	public void show()
 	{
 		fill(myColor);
-		stroke(myColor);
-		println("fill");
-		translate((float)myCenterX,(float)myCenterY);
+		stroke(myColor);translate((float)myCenterX,(float)myCenterY);
 		beginShape();
 		for (int nI = 0; nI < vertices; nI++)
 		{
