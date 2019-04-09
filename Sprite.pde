@@ -31,17 +31,14 @@ abstract class Sprite
 		if(myCenterX<=900&&right)
 		{
 			walk=8;
-			right=false;
 		}
 		if(myCenterX>=0&&left)
 		{
 			walk=-8;
-			left=false;
 		}
 		if(myCenterY>=0&&up)
 		{
 			grav=-5; //hewwo :3 -Jodie :33333333333333;
-			up=false;
 		}
 		if(myCenterY<=400&&myCenterY>=0&&down)
 		{

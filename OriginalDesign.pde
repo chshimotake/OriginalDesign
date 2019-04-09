@@ -1,12 +1,28 @@
 MainChara mSprite;
 int centerY=height/2;
 int centerX=width/2;
+int wakright=0;
+int wakleft=0;
+int wakrcount=0;
+int waklcount=0;
+boolean waright=true;
+boolean waleft=false;
+PImage[] walkLeft=new PImage[4];
+PImage[] walkRight=new PImage[4];
 public void setup()
 {
 	mSprite=new MainChara();
 	background(0,0,0);
 	size(1000, 500);
 	frameRate(60);
+	walkLeft[0]=loadImage("Spriteleft1.png");
+	walkLeft[1]=loadImage("Spriteleft2.png");
+	walkLeft[2]=loadImage("Spriteleft3.png");
+	walkLeft[3]=loadImage("Spriteleft4.png");
+	walkRight[0]=loadImage("Spriteright1.png");
+	walkRight[1]=loadImage("Spriteright2.png");
+	walkRight[2]=loadImage("Spriteright3.png");
+	walkRight[3]=loadImage("Spriteright4.png");
 }
 public void show()
 {
@@ -16,6 +32,14 @@ void drawZoom()
 {
 	mSprite.show();
 	testRect();
+	if(waright)
+	{
+		image(walkRight[wakright], mSprite.getX()+15, mSprite.getY(),50,75);
+	}
+	if(waleft)
+	{
+		image(walkLeft[wakleft], mSprite.getX()+15, mSprite.getY(),50,75);
+	}
 }
 public void draw()
 {
@@ -31,6 +55,14 @@ public void keyPressed()
 			//if(mSprite.getX()<400)
 			//{
 				mSprite.moveRight();
+				waright=true;
+				waleft=false;
+				wakright++;
+				if(wakright>3)
+				{
+					wakright=0;
+				}
+				wakleft=0;
 			// }
 			// if(mSprite.getX()>=900)
 			// {
@@ -40,6 +72,13 @@ public void keyPressed()
 		break;
 		case 'a':
 			mSprite.moveLeft();
+			waright=false;
+			waleft=true;
+			wakleft++;
+			if(wakleft>3)
+			{
+				wakleft=0;
+			}
 			// if(mSprite.getX()<=0)
 			// {
 			// 	mSprite.setX(0);
@@ -71,6 +110,21 @@ public void keyPressed()
 			// }
 		break;
 	}
+}
+public void keyReleased()
+{
+	switch(key)
+	{
+		case 'd':
+			mSprite.right=false;
+		break;
+		case 'a':
+			mSprite.left=false;
+		break;
+		case 'w':
+			mSprite.up=false;
+		break;
+	}	
 }
 public void testRect()
 {
