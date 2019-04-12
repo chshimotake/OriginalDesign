@@ -45,9 +45,7 @@ abstract class Sprite
 			myCenterY+=10;
 		}
 		if(myCenterX<=900&&myCenterX>=0)
-			println("y before grav: "+myCenterY);
 			myCenterX+=walk;
-			println("y after grav: "+myCenterY);
 			walkcount++;
 			if(walkcount%15==0)
 			{
@@ -62,9 +60,7 @@ abstract class Sprite
 			}
 		if(myCenterY>=0)
 		{
-			println("y before grav: "+myCenterY);
 			myCenterY+=grav;
-			println("y after grav: "+myCenterY);
 			gravcount++;
 			if(gravcount%15==0)
 			{

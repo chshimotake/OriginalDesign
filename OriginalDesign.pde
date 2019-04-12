@@ -34,6 +34,7 @@ void drawZoom()
 	testRect();
 	if(waright)
 	{
+		walkCount();
 		image(walkRight[wakright], mSprite.getX()+15, mSprite.getY(),50,75);
 	}
 	if(waleft)
@@ -57,10 +58,12 @@ public void keyPressed()
 				mSprite.moveRight();
 				waright=true;
 				waleft=false;
-				wakright++;
-				if(wakright>3)
+				//wakright++;
+				wakrcount++; //hewwos again :3
+				println("wakrcount: "+wakrcount);
+				if(wakrcount>20)
 				{
-					wakright=0;
+					wakrcount=0;
 				}
 				wakleft=0;
 			// }
@@ -117,9 +120,11 @@ public void keyReleased()
 	{
 		case 'd':
 			mSprite.right=false;
+			wakrcount=0;
 		break;
 		case 'a':
 			mSprite.left=false;
+			waklcount=0;
 		break;
 		case 'w':
 			mSprite.up=false;
@@ -138,7 +143,25 @@ public void backScreen()
 	rect(0, 0, width, height);
 	noFill();
 }
-
+public void walkCount()
+{
+	if(wakrcount>=0&&wakrcount<=5)
+	{
+		wakright=0;
+	}
+	if(wakrcount>=6&&wakrcount<=10)
+	{
+		wakright=1;
+	}
+	if(wakrcount>=11&&wakrcount<=15)
+	{
+		wakright=2;
+	}
+	if(wakrcount>=16&&wakrcount<=20)
+	{
+		wakright=3;
+	}
+}
 /*float endX, endY;
 float centerX=250, centerY=250, rad=150;
 float leng=150, wid=150;
