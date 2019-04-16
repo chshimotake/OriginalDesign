@@ -30,11 +30,11 @@ abstract class Sprite
 	{
 		if(myCenterX<=900&&right)
 		{
-			walk=8;
+			walk=4;
 		}
 		if(myCenterX>=0&&left)
 		{
-			walk=-8;
+			walk=-4;
 		}
 		if(myCenterY>=0&&up)
 		{
@@ -44,18 +44,18 @@ abstract class Sprite
 		{
 			myCenterY+=10;
 		}
-		if(myCenterX<=900&&myCenterX>=0)
+		if(myCenterX<=900||myCenterX>=0)
 			myCenterX+=walk;
 			walkcount++;
 			if(walkcount%15==0)
 			{
 				if(walk>0)
 				{
-					walk-=4;
+					walk--;
 				}
 				if(walk<0)
 				{
-					walk+=4;
+					walk++;
 				}
 			}
 		if(myCenterY>=0)

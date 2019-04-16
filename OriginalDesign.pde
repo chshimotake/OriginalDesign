@@ -5,6 +5,7 @@ int wakright=0;
 int wakleft=0;
 int wakrcount=0;
 int waklcount=0;
+int jumpcount=0;
 boolean waright=true;
 boolean waleft=false;
 PImage[] walkLeft=new PImage[4];
@@ -32,20 +33,38 @@ void drawZoom()
 {
 	mSprite.show();
 	testRect();
-	if(waright)
+	if(mSprite.up==false&&mSprite.getY()>=400)
 	{
-		walkCount();
-		image(walkRight[wakright], mSprite.getX()+15, mSprite.getY(),50,75);
-	}
-	if(waleft)
+		if(waright)
+		{
+			walkCount();
+			image(walkRight[wakright], mSprite.getX()+15, mSprite.getY()+25,50,75);
+		}
+		if(waleft)
+		{
+			walkCount();
+			image(walkLeft[wakleft], mSprite.getX()+15, mSprite.getY()+25,50,75);
+		}
+	}else if(mSprite.up==true)
 	{
-		image(walkLeft[wakleft], mSprite.getX()+15, mSprite.getY(),50,75);
+		if(waright)
+		{
+			
+			wakright=1;
+			image(walkRight[1], mSprite.getX()+15, mSprite.getY()+25,50,75);
+		}
+		if(waleft)
+		{
+			wakleft=1;
+			image(walkLeft[1], mSprite.getX()+15, mSprite.getY()+25,50,75);
+		}
 	}
 }
 public void draw()
 {
 	backScreen();
 	mSprite.move();
+	upCount();
 	show();
 }
 public void keyPressed()
@@ -77,11 +96,13 @@ public void keyPressed()
 			mSprite.moveLeft();
 			waright=false;
 			waleft=true;
-			wakleft++;
-			if(wakleft>3)
+			waklcount++;
+			println("waklcount: "+waklcount);
+			if(waklcount>20)
 			{
-				wakleft=0;
+				waklcount=0;
 			}
+			wakright=0;
 			// if(mSprite.getX()<=0)
 			// {
 			// 	mSprite.setX(0);
@@ -90,6 +111,16 @@ public void keyPressed()
 		break;
 		case 'w':
 			mSprite.moveUp();
+			// wakright=1;
+			// if(waright)
+			// {
+			// 	image(walkRight[1], mSprite.getX()+15, mSprite.getY()+25,50,75);
+			// }
+			// wakleft=1;
+			// if(waleft)
+			// {
+			// 	image(walkLeft[1], mSprite.getX()+15, mSprite.getY()+25,50,75);
+			// }
 			// if(mSprite.getY()>0)
 			// {
 			// 	mSprite.moveY(-10);
@@ -126,10 +157,22 @@ public void keyReleased()
 			mSprite.left=false;
 			waklcount=0;
 		break;
-		case 'w':
-			mSprite.up=false;
-		break;
 	}	
+}
+public void upCount()
+{
+	if(mSprite.up==true)
+	{
+		if(jumpcount==35)
+		{
+			mSprite.up=false;
+			jumpcount=0;
+		}
+		if(jumpcount<35)
+		{
+			jumpcount++;
+		}
+	}
 }
 public void testRect()
 {
@@ -145,21 +188,51 @@ public void backScreen()
 }
 public void walkCount()
 {
-	if(wakrcount>=0&&wakrcount<=5)
+	if(mSprite.up==false)
 	{
-		wakright=0;
-	}
-	if(wakrcount>=6&&wakrcount<=10)
+		if(wakrcount>=0&&wakrcount<=5&&waright)
+		{
+			wakright=0;
+		}
+		if(wakrcount>=6&&wakrcount<=10&&waright)
+		{
+			wakright=1;
+		}
+		if(wakrcount>=11&&wakrcount<=15&&waright)
+		{
+			wakright=2;
+		}
+		if(wakrcount>=16&&wakrcount<=20&&waright)
+		{
+			wakright=3;
+		}
+
+		if(waklcount>=0&&waklcount<=5&&waleft)
+		{
+			wakleft=0;
+		}
+		if(waklcount>=6&&waklcount<=10&&waleft)
+		{
+			wakleft=1;
+		}
+		if(waklcount>=11&&waklcount<=15&&waleft)
+		{
+			wakleft=2;
+		}
+		if(waklcount>=16&&waklcount<=20&&waleft)
+		{
+			wakleft=3;
+		}
+	}else if(mSprite.up==true)
 	{
-		wakright=1;
-	}
-	if(wakrcount>=11&&wakrcount<=15)
-	{
-		wakright=2;
-	}
-	if(wakrcount>=16&&wakrcount<=20)
-	{
-		wakright=3;
+		if(waleft)
+		{
+			wakleft=1;
+		}
+		if(waright)
+		{
+			wakright=1;
+		}
 	}
 }
 /*float endX, endY;
