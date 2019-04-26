@@ -6,8 +6,10 @@ int wakleft=0;
 int wakrcount=0;
 int waklcount=0;
 int jumpcount=0;
+boolean upcnt=false;
 boolean waright=true;
 boolean waleft=false;
+boolean jump=false;
 PImage[] walkLeft=new PImage[4];
 PImage[] walkRight=new PImage[4];
 public void setup()
@@ -33,7 +35,7 @@ void drawZoom()
 {
 	mSprite.show();
 	testRect();
-	if(mSprite.up==false&&mSprite.getY()>=400)
+	if(mSprite.up==false)
 	{
 		if(waright)
 		{
@@ -49,14 +51,15 @@ void drawZoom()
 	{
 		if(waright)
 		{
-			
 			wakright=1;
 			image(walkRight[1], mSprite.getX()+15, mSprite.getY()+25,50,75);
+			println("sprite location: ", mSprite.getX(), mSprite.getY());
 		}
 		if(waleft)
 		{
 			wakleft=1;
 			image(walkLeft[1], mSprite.getX()+15, mSprite.getY()+25,50,75);
+			println("sprite location: ", mSprite.getX(), mSprite.getY());
 		}
 	}
 }
@@ -110,7 +113,12 @@ public void keyPressed()
 			// }
 		break;
 		case 'w':
-			mSprite.moveUp();
+			if(jump==false)
+			{
+				mSprite.moveUp();
+				upcnt=true;
+				jump=true;
+			}
 			// wakright=1;
 			// if(waright)
 			// {
@@ -133,6 +141,7 @@ public void keyPressed()
 		break;
 		case 's':
 			mSprite.moveDown();
+			jump=false;
 			// if(mSprite.getY()<400)
 			// {
 			// 	mSprite.moveY(10);
@@ -161,16 +170,33 @@ public void keyReleased()
 }
 public void upCount()
 {
-	if(mSprite.up==true)
+	if(upcnt==true)
 	{
-		if(jumpcount==35)
+		if(jumpcount==60)
 		{
-			mSprite.up=false;
+			upcnt=false;//hewwo :3
+			println("upcnt=false");
 			jumpcount=0;
+			println("jumpcount=0");
+			jump=false;
+			println("jump=false");
 		}
-		if(jumpcount<35)
+		if(jumpcount<60)
 		{
 			jumpcount++;
+			println("jumpcount: "+jumpcount);
+			if(waleft)
+			{
+				wakleft=1;
+			}
+			if(waright)
+			{
+				wakright=1;
+			}
+		}
+		if(jumpcount>10)
+		{
+			mSprite.up=false;
 		}
 	}
 }
@@ -222,16 +248,6 @@ public void walkCount()
 		if(waklcount>=16&&waklcount<=20&&waleft)
 		{
 			wakleft=3;
-		}
-	}else if(mSprite.up==true)
-	{
-		if(waleft)
-		{
-			wakleft=1;
-		}
-		if(waright)
-		{
-			wakright=1;
 		}
 	}
 }
