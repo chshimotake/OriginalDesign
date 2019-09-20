@@ -6,12 +6,16 @@ int wakleft=0;
 int wakrcount=0;
 int waklcount=0;
 int jumpcount=0;
+int mapX=0;
+int mapWid=3584;
+int mapHei=720;
 boolean upcnt=false;
 boolean waright=true;
 boolean waleft=false;
 boolean jump=false;
 PImage[] walkLeft=new PImage[4];
 PImage[] walkRight=new PImage[4];
+PImage mapTest;
 public void setup()
 {
 	mSprite=new MainChara();
@@ -26,6 +30,7 @@ public void setup()
 	walkRight[1]=loadImage("Spriteright2.png");
 	walkRight[2]=loadImage("Spriteright3.png");
 	walkRight[3]=loadImage("Spriteright4.png");
+	mapTest=loadImage("mapTest.png");//3584x720
 }
 public void show()
 {
@@ -66,9 +71,18 @@ void drawZoom()
 public void draw()
 {
 	backScreen();
+	mapDraw(mapWid, mapHei);
 	mSprite.move();
 	upCount();
 	show();
+}
+public void mapDraw(int a, int b)
+{
+	image(mapTest, mapX, 0, a, b);
+	if(mapX>1000-a)
+	{
+		mapX--;
+	}
 }
 public void keyPressed()
 {
